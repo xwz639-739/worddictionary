@@ -2,11 +2,11 @@
 
 void menu1()
 {
-	printf("**** 1. Ìí¼Óµ¥´Ê*** 2. ²éÕÒµ¥´Ê  ****\n");
-	printf("**** 3. É¾³ıµ¥´Ê*** 4. Õ¹Ê¾µ¥´Ê±í****\n");
-	printf("**** 5. ±³µ¥´Ê  *** 6. ±£´æ      ****\n");
-	printf("*****0. ÍË³ö    *********************\n");
-	printf("ÇëÑ¡Ôñ£º");
+	printf("**** 1. æ·»åŠ å•è¯*** 2. æŸ¥æ‰¾å•è¯  ****\n");
+	printf("**** 3. åˆ é™¤å•è¯*** 4. å±•ç¤ºå•è¯è¡¨****\n");
+	printf("**** 5. èƒŒå•è¯  *** 6. ä¿å­˜      ****\n");
+	printf("*****0. é€€å‡º    *********************\n");
+	printf("è¯·é€‰æ‹©ï¼š");
 }
 void LoadWordlist(wordlist* ps);
 void AddSpace(wordlist* tmp);
@@ -27,7 +27,7 @@ void LoadWordlist(wordlist* ps)
 	FILE* pfRead = fopen("words_list.txt", "rb");
 	if (pfRead == NULL)
 	{
-		perror("¶ÁÎÄ¼şÊ§°Ü");
+		perror("è¯»æ–‡ä»¶å¤±è´¥");
 		return;
 	}
 	while (fread(&tmp, sizeof(word), 1, pfRead))
@@ -48,21 +48,21 @@ void AddSpace(wordlist* tmp)
 	tmp->list = realloc(tmp->list, (tmp->cap + add_cap) * sizeof(word));
 	if (tmp->list != NULL)
 	{
-		printf("ÔöÈİ³É¹¦\n");
+		printf("å¢å®¹æˆåŠŸ\n");
 	}
 	else
-		perror("ÔöÈİÊ§°Ü\n");
+		perror("å¢å®¹å¤±è´¥\n");
 	tmp->cap = tmp->cap + add_cap;
 }
 void AddWord(wordlist* ps)
 {
 	if (ps->size == ps->cap)
 		AddSpace(ps);
-	printf("ÇëÊäÈëµ¥´Ê£º");
+	printf("è¯·è¾“å…¥å•è¯ï¼š");
 	scanf("%s", ps->list[ps->size].character);
-	printf("ÇëÊäÈë¼ÙÃû£º");
+	printf("è¯·è¾“å…¥å‡åï¼š");
 	scanf("%s", ps->list[ps->size].kana);
-	printf("ÇëÊäÈëÖĞÎÄ£º");
+	printf("è¯·è¾“å…¥ä¸­æ–‡ï¼š");
 	scanf("%s", ps->list[ps->size].chinese);
 	ps->size++;
 }
@@ -72,12 +72,12 @@ void ShowList(wordlist* ps)
 	int i = 0;
 	if (ps->size == NULL)
 	{
-		printf("µ¥´Ê±íÎª¿Õ\n");
+		printf("å•è¯è¡¨ä¸ºç©º\n");
 		return;
 	}
 	else
 	{
-		printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+		printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 		for (i = 0; i < ps->size; i++)
 			printf("%-25s\t%-25s\t%-25s\n", ps->list[i].character, ps->list[i].kana, ps->list[i].chinese);
 	}
@@ -85,15 +85,15 @@ void ShowList(wordlist* ps)
 
 void menu2()
 {
-	printf("1.Í¨¹ıµ¥´Ê²éÕÒ\n");
-	printf("2.Í¨¹ı¼ÙÃû²éÕÒ\n");
-	printf("3.Í¨¹ıÖĞÎÄ²éÕÒ\n");
-	printf("4.·µ»Ø\n");
+	printf("1.é€šè¿‡å•è¯æŸ¥æ‰¾\n");
+	printf("2.é€šè¿‡å‡åæŸ¥æ‰¾\n");
+	printf("3.é€šè¿‡ä¸­æ–‡æŸ¥æ‰¾\n");
+	printf("4.è¿”å›\n");
 }
 void search1(wordlist* tmp)
 {
 	int i = 0;
-	printf("ÇëÊäÈëÒª²éÕÒµÄµ¥´Ê£º");
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å•è¯ï¼š");
 	char word_tmp[word_length] = { 0 };
 	scanf("%s", word_tmp);
 	for (i = 0; i < tmp->size; i++)
@@ -104,17 +104,17 @@ void search1(wordlist* tmp)
 		}
 	}
 	if (i == tmp->size)
-		printf("Î´ÕÒµ½Ëù²éµ¥´ÊµÄ¼ÙÃû\n");
+		printf("æœªæ‰¾åˆ°æ‰€æŸ¥å•è¯çš„å‡å\n");
 	else
 	{
-		printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+		printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 		printf("%-25s\t%-25s\t%-25s\n", tmp->list[i].character, tmp->list[i].kana, tmp->list[i].chinese);
 	}
 }
 void search2(wordlist* tmp)
 {
 	int i = 0;
-	printf("ÇëÊäÈëÒª²éÕÒµÄµ¥´ÊµÄÖĞÎÄ£º");
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å•è¯çš„ä¸­æ–‡ï¼š");
 	char kana_tmp[word_length] = { 0 };
 	scanf("%s", kana_tmp);
 	for (i = 0; i < tmp->size; i++)
@@ -125,17 +125,17 @@ void search2(wordlist* tmp)
 		}
 	}
 	if (i == tmp->size)
-		printf("Î´ÕÒµ½Ëù²éµ¥´Ê\n");
+		printf("æœªæ‰¾åˆ°æ‰€æŸ¥å•è¯\n");
 	else
 	{
-		printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+		printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 		printf("%-25s\t%-25s\t%-25s\n", tmp->list[i].character, tmp->list[i].kana, tmp->list[i].chinese);
 	}
 }
 void search3(wordlist* tmp)
 {
 	int i = 0;
-	printf("ÇëÊäÈëÒª²éÕÒµÄµ¥´Ê£º");
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å•è¯ï¼š");
 	char chinese_tmp[word_length] = { 0 };
 	scanf("%s", chinese_tmp);
 	for (i = 0; i < tmp->size; i++)
@@ -146,10 +146,10 @@ void search3(wordlist* tmp)
 		}
 	}
 	if (i == tmp->size)
-		printf("Î´ÕÒµ½Ëù²éµ¥´Ê\n");
+		printf("æœªæ‰¾åˆ°æ‰€æŸ¥å•è¯\n");
 	else
 	{
-		printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+		printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 		printf("%-25s\t%-25s\t%-25s\n", tmp->list[i].character, tmp->list[i].kana, tmp->list[i].chinese);
 	}
 }
@@ -181,7 +181,7 @@ void SearchWord(wordlist* ps)
 void DelWord(wordlist* ps)
 {
 	int i = 0;
-	printf("ÇëÊäÈëÒªÉ¾³ıµÄµ¥´Ê£º");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å•è¯ï¼š");
 	char word_tmp[word_length] = { 0 };
 	scanf("%s", word_tmp);
 	for (i = 0; i < ps->size; i++)
@@ -198,10 +198,10 @@ void DelWord(wordlist* ps)
 
 void menu3()
 {
-	printf("1.Í¨¹ıµ¥´Ê±³ÖĞÎÄ\n");
-	printf("2.Í¨¹ı¼ÙÃû±³ÖĞÎÄ\n");
-	printf("3.Í¨¹ıÖĞÎÄ±³µ¥´Ê\n");
-	printf("4.·µ»Ø\n");
+	printf("1.é€šè¿‡å•è¯èƒŒä¸­æ–‡\n");
+	printf("2.é€šè¿‡å‡åèƒŒä¸­æ–‡\n");
+	printf("3.é€šè¿‡ä¸­æ–‡èƒŒå•è¯\n");
+	printf("4.è¿”å›\n");
 }
 void recite1(wordlist* tmp)
 {
@@ -212,21 +212,21 @@ void recite1(wordlist* tmp)
 	char word_tmp[word_length];
 	do
 	{
-		printf("ÇëÊäÈëÖĞÎÄÒâË¼(´íÎó3´ÎÖ±½Ó¿´´ğ°¸)£º");
+		printf("è¯·è¾“å…¥ä¸­æ–‡æ„æ€(é”™è¯¯3æ¬¡ç›´æ¥çœ‹ç­”æ¡ˆ)ï¼š");
 		scanf("%s", word_tmp);
 		if (0 == strcmp(ret.chinese, word_tmp))
 		{
-			printf("»Ø´ğÕıÈ·\n");
+			printf("å›ç­”æ­£ç¡®\n");
 			break;
 		}
 	    a++;
 	    if (a == 3)
 		{
-			printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+			printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 			printf("%-25s\t%-25s\t%-25s\n", ret.character, ret.kana, ret.chinese);
 			break;
 		}
-			printf("»Ø´ğ´íÎó£¬ÇëÖØÊÔ\n");
+			printf("å›ç­”é”™è¯¯ï¼Œè¯·é‡è¯•\n");
 	} while (a != 3);
 }
 void recite2(wordlist* tmp)
@@ -238,21 +238,21 @@ void recite2(wordlist* tmp)
 	char word_tmp[word_length];
 	do
 	{
-		printf("ÇëÊäÈëÖĞÎÄÒâË¼(´íÎó3´ÎÖ±½Ó¿´´ğ°¸)£º");
+		printf("è¯·è¾“å…¥ä¸­æ–‡æ„æ€(é”™è¯¯3æ¬¡ç›´æ¥çœ‹ç­”æ¡ˆ)ï¼š");
 		scanf("%s", word_tmp);
 		if (0 == strcmp(ret.chinese, word_tmp))
 		{
-			printf("»Ø´ğÕıÈ·\n");
+			printf("å›ç­”æ­£ç¡®\n");
 			break;
 		}
 		a++;
 		if (a == 3)
 		{
-			printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+			printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 			printf("%-25s\t%-25s\t%-25s\n", ret.character, ret.kana, ret.chinese);
 			break;
 		}
-		printf("»Ø´ğ´íÎó£¬ÇëÖØÊÔ\n");
+		printf("å›ç­”é”™è¯¯ï¼Œè¯·é‡è¯•\n");
 	} while (a != 3);
 }
 void recite3(wordlist* tmp)
@@ -264,21 +264,21 @@ void recite3(wordlist* tmp)
 	char word_tmp[word_length];
 	do
 	{
-		printf("ÇëÊäÈëÖĞÎÄÒâË¼(´íÎó3´ÎÖ±½Ó¿´´ğ°¸)£º");
+		printf("è¯·è¾“å…¥ä¸­æ–‡æ„æ€(é”™è¯¯3æ¬¡ç›´æ¥çœ‹ç­”æ¡ˆ)ï¼š");
 		scanf("%s", word_tmp);
 		if (0 == strcmp(ret.character, word_tmp))
 		{
-			printf("»Ø´ğÕıÈ·\n");
+			printf("å›ç­”æ­£ç¡®\n");
 			break;
 		}
 		a++;
 		if (a == 3)
 		{
-			printf("%-25s\t%-25s\t%-25s\n", "µ¥´Ê", "¼ÙÃû", "ÖĞÎÄÒâË¼");
+			printf("%-25s\t%-25s\t%-25s\n", "å•è¯", "å‡å", "ä¸­æ–‡æ„æ€");
 			printf("%-25s\t%-25s\t%-25s\n", ret.character, ret.kana, ret.chinese);
 			break;
 		}
-		printf("»Ø´ğ´íÎó£¬ÇëÖØÊÔ\n");
+		printf("å›ç­”é”™è¯¯ï¼Œè¯·é‡è¯•\n");
 	} while (a != 3);
 }
 void ReciteWord(wordlist* ps)
@@ -305,17 +305,17 @@ void ReciteWord(wordlist* ps)
 
 void SaveList(wordlist* ps)
 {
-	FILE* pfWrite = fopen("words_list.txt", "ab");
+	FILE* pfWrite = fopen("words_list.txt", "wb");
 	if (pfWrite == NULL)
 	{
-		perror("´ò¿ªÎÄ¼şÊ§°Ü");
+		perror("æ‰“å¼€æ–‡ä»¶å¤±è´¥");
 		return;
 	}
 	static int start_save = 0;
 	for (int i = start_save; i < ps->size; i++)
 	{
 		fwrite(&(ps->list[i]), sizeof(word), 1, pfWrite);
-		printf("ÒÑ±£´æ\n");
+		printf("å·²ä¿å­˜\n");
 	}
 	start_save = ps->size;
 	fclose(pfWrite);
